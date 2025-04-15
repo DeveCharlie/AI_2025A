@@ -39,14 +39,14 @@ public class Main {
         */
 
         //Nota para despues: Agregar la distancias a los nodos para la busqueda heuristica
-        grafo.agregarArista(new_york, toronto, 5);
         grafo.agregarArista(new_york, chicago, 3);
+        grafo.agregarArista(new_york, toronto, 5);
         grafo.agregarArista(new_york, denver, 5);
         grafo.agregarArista(toronto, calgari, 3);
         grafo.agregarArista(toronto, los_angeles, 8);
         grafo.agregarArista(chicago, denver, 3);
-        grafo.agregarArista(denver, los_angeles, 10);
         grafo.agregarArista(denver, houston, 4);
+        grafo.agregarArista(denver, los_angeles, 10);
         grafo.agregarArista(houston, los_angeles, 10);
         grafo.agregarArista(houston, urd, 4);
 

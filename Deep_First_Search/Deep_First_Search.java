@@ -46,15 +46,24 @@ public class Deep_First_Search {
     }
 
     public List<Node> busquedaProfundidad(){
+        List<Node> nodosAEliminar = new ArrayList<>();
 
         int ultimoTamListaCerrada = 0;
         while(!compararNodoFinal()){
             //3.1.1 y 3.1.2 investigar los descencietes inmediatos del nodo y agregarlos a la lista cerrada
             tamopenList = openList.size();
             List<Node> descendientes = grafo.obtenerVecinos(openList.get(tamopenList -1));
+            System.out.println("Imprimiendo descencdientes de " + openList.get(tamopenList -1).data);
+
             for (Node d : descendientes){
+                //Agregar validacion para que no se regrese a un nodo padre y evitar bucles
+                if (openList.contains(d)){
+                    nodosAEliminar.add(d);
+                }
                 System.out.println(d.data);
             }
+            descendientes.removeAll(nodosAEliminar);
+
             //REVISAR: EL NODO PADRE NO DEBERIA DE ESTAR EN LA LISTA DE DESCENDIENTES, ELIMINARLO!
             Node anterior = apuntadores.get(openList.get(tamopenList -1)); // Obtener el nodo padre
             descendientes.removeIf(nodo -> nodo.equals(anterior));
@@ -72,7 +81,7 @@ public class Deep_First_Search {
                 for(int i = ultimoTamListaCerrada; i < tamcloseList; i++){
                     Node padre =  openList.get(tamopenList -1);
                     Node hijo = closeList.get(i);
-                    //System.out.println("hijo: " + hijo.data + " padre: " + padre.data);
+                    System.out.println("hijo: " + hijo.data + " padre: " + padre.data);
                     apuntadores.put(hijo, padre);
                 }
                 ultimoTamListaCerrada = apuntadores.size() -1;
@@ -88,7 +97,8 @@ public class Deep_First_Search {
             openList.add(sacarNodoListaCerrada);
             tamopenList = openList.size();
 
-            //imprimirListas();
+            imprimirListas();
+            scanner.nextLine();
         }
         return openList;
     }
